@@ -35,3 +35,25 @@ test("doesn't transform first character before 'A' ('@')", function () {
 test("doesn't transform first character after 'Z' ('[')", function () {
     expect(rot13("[")).toBe("[")
 })
+
+test("transforms all lowercase letters", function () {
+    expect(rot13("abcdefghijklmnopqrstuvwxyz"))
+        .toBe("nopqrstuvwxyzabcdefghijklm")
+})
+
+test("transforms all uppercase letters", function () {
+    expect(rot13("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+        .toBe("NOPQRSTUVWXYZABCDEFGHIJKLM")
+})
+
+test("doesn't transform multiple symbols", function () {
+    expect(rot13("`{@[")).toBe("`{@[")
+})
+
+test("throws an error if no parameter is passed", function () {
+    expect(function () { rot13() }).toThrow("Expected a string parameter")
+})
+
+test("throws an error if non-string is passed", function () {
+    expect(function () { rot13(123) }).toThrow("Expected a string parameter")
+})
